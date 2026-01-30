@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/detail_update.css' %}">{% endblock %}
+
+
+{% block content %}
+<div class="product-detail-container">
+    <div class="product-visual">
+        <div class="image-wrapper">
+            <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+        </div>
+    </div>
+    
+    <div class="product-info">
+        <h1 class="product-title">{{ product.name }}</h1>
+        
+        {% if product.description %}
+        <div class="product-description">
+            <h5 class="info-label">Описание:</h5>
+            <p>{{ product.description|linebreaks }}</p>
+        </div>
+        {% endif %}
+        
+        <div class="product-pricing">
+            <h5 class="info-label">Цена:</h5>
+            <p class="price-big">{{ product.price }} ₽</p>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn-buy">
+                <i class="bi bi-cart-plus"></i> Добавить в корзину
+            </button>
+            <button class="btn-fav">
+                <i class="bi bi-heart"></i>
+            </button>
+        </div>
+        
+        <hr class="divider">
+        
+        <!-- <div class="product-meta">
+            <p><i class="bi bi-calendar"></i> Добавлен: {{ product.created_at|date:"d.m.Y H:i" }}</p>
+            {% if product.updated_at != product.created_at %}
+            <p><i class="bi bi-arrow-clockwise"></i> Обновлен: {{ product.updated_at|date:"d.m.Y H:i" }}</p>
+            {% endif %}
+        </div> -->
+        
+        <div class="admin-actions">
+            <a href="{% url 'shop:product_update' product.pk %}" class="btn-edit">
+                <i class="bi bi-pencil"></i> Редактировать
+            </a>
+            <button class="btn-delete" onclick="document.getElementById('delete-modal').style.display='flex'">
+                <i class="bi bi-trash"></i> Удалить
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="back-nav">
+    <button onclick="history.back()" class="btn-back">
+        <i class="bi bi-arrow-left"></i> Назад в каталог
+    </button>
+</div>
+
+<div id="delete-modal" class="custom-modal">
+    <div class="modal-content">
+        <h3>Удалить товар?</h3>
+        <p>Вы уверены, что хотите удалить "{{ product.name }}"?</p>
+        <div class="modal-footer">
+            <button class="btn-cancel" onclick="this.closest('.custom-modal').style.display='none'">Отмена</button>
+            <form action="{% url 'shop:product_delete' product.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-confirm">Удалить</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

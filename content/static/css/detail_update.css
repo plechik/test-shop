@@ -1,0 +1,259 @@
+/* Контейнер страницы товара */
+.product-detail-container {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* Левая часть: Картинка */
+.product-visual {
+    flex: 1;
+    min-width: 0;
+}
+
+.image-wrapper {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fdfdfd;
+    display: flex;
+    justify-content: center;
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+/* Правая часть: Текст */
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #212529;
+}
+
+.info-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.price-big {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #212529;
+    margin-bottom: 25px;
+}
+
+/* Кнопки действий */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-buy {
+    flex: 1;
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-buy:hover { background: #218838; }
+
+.btn-fav {
+    width: 60px;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    color: #dc3545;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn-fav:hover { background: #f8f9fa; }
+
+/* Мета и Админка */
+.divider {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.product-meta p {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.admin-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit, .btn-delete {
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-edit { background: #ffc107; color: #000; }
+.btn-delete { background: #dc3545; color: #fff; border: none; }
+
+/* Навигация */
+.back-nav {
+    margin-top: 20px;
+}
+
+.btn-back {
+    background: none;
+    border: 1px solid #ced4da;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Кастомное модальное окно */
+.custom-modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.btn-cancel { background: #eee; border: none; padding: 10px; border-radius: 6px; cursor: pointer; }
+.btn-confirm { background: #dc3545; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; }
+
+/* Адаптивность */
+@media (max-width: 850px) {
+    .product-detail-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .product-title { font-size: 1.5rem; }
+}
+
+/* --- Стили для форм администрирования --- */
+.admin-page-container { margin-top: 20px; }
+
+.custom-breadcrumb { margin-bottom: 20px; color: #6c757d; font-size: 0.9rem; }
+.custom-breadcrumb a { color: #007bff; text-decoration: none; }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+}
+
+.form-main-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.card-header-yellow {
+    background: #ffc107;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header-yellow h2 { margin: 0; font-size: 1.2rem; }
+.id-badge { background: #343a40; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; }
+
+.custom-form { padding: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; color: #495057; }
+.form-group label span { color: #dc3545; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* Стили полей ввода (Django автоматически вешает классы или используй селекторы по тегам) */
+.custom-form input[type="text"], 
+.custom-form input[type="number"],
+.custom-form textarea, 
+.custom-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.input-with-unit { position: relative; display: flex; align-items: center; }
+.unit { position: absolute; right: 15px; color: #adb5bd; }
+
+/* Кнопки */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-save-main { background: #ffc107; border: none; padding: 10px 20px; border-radius: 6px 0 0 6px; cursor: pointer; font-weight: bold; }
+.btn-save-alt { background: #e0a800; border: none; padding: 10px 15px; border-radius: 0 6px 6px 0; cursor: pointer; border-left: 1px solid rgba(0,0,0,0.1); }
+.btn-cancel-text { color: #6c757d; text-decoration: none; }
+
+/* Сайдбар */
+.info-card { background: #fff; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.info-card h3 { font-size: 1rem; margin-bottom: 15px; border-bottom: 2px solid #ffc107; display: inline-block; }
+.current-img { width: 100%; border-radius: 8px; margin-bottom: 10px; }
+
+.btn-link-danger { background: none; border: none; color: #dc3545; cursor: pointer; font-size: 0.85rem; padding: 0; }
+.sidebar-buttons { display: flex; flex-direction: column; gap: 10px; }
+.btn-side { text-decoration: none; padding: 8px; text-align: center; border: 1px solid #ddd; border-radius: 6px; color: #333; font-size: 0.9rem; }
+.btn-side.danger { color: #dc3545; border-color: #f5c6cb; }
+
+.preview-box img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 10px; border: 2px dashed #ffc107; }
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-sidebar { order: -1; } /* Сайдбар наверх на мобилах */
+}

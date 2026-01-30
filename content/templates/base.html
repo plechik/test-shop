@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Магазин Evrika{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        {% include 'partials/navbar.html' %}
+    </header>
+    
+    <main class="container">
+        {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+                <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <b>Наш адрес</b>
+                <p>г. Мелитополь, ул. Карла Маркса, 1А</p>
+            </div>
+            <div class="footer-section">
+                <b>Контакты</b>
+                <p>Телефон: +7(99) 000 00 00</p>
+            </div>
+            <div class="footer-section">
+                <b>Время работы</b>
+                <p>Пн-Пт: 8:00 - 14:00</p>
+                <p>Сб-Вс: 8:00 - 14:00</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>© 2026 Магазин "Evrika". Все права защищены.</p>
+        </div>
+    </footer>
+    
+    {% block js %}{% endblock %}
+</body>
+</html>

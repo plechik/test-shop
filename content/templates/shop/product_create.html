@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% if form.instance.pk %}Редактирование{% else %}Создание{% endif %} товара - Evrika
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="mb-0">
+                    <i class="bi bi-{% if form.instance.pk %}pencil-square{% else %}plus-circle{% endif %}"></i>
+                    {% if form.instance.pk %}Редактирование товара{% else %}Добавление нового товара{% endif %}
+                </h4>
+            </div>
+            
+            <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data" novalidate id="product-form">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                        <p class="mb-0">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Название товара -->
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="id_name" class="form-label fw-bold">Название товара *</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.name.errors %}
+                                <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- 1c id -->
+                        <div class="col-md-4 mb-3">
+                            <label for="id_id_1c" class="form-label fw-bold">Id в таблице 1С *</label>
+                            {{ form.id_1c }}
+                            {% if form.id_1c.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.id_1c.errors %}
+                                <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Описание -->
+                    <div class="mb-3">
+                        <label for="id_description" class="form-label fw-bold">Описание товара</label>
+                        {{ form.description }}
+                        <div class="form-text">Опишите ваш товар подробно. Это поможет покупателям.</div>
+                        {% if form.description.errors %}
+                        <div class="text-danger small mt-1">
+                            {% for error in form.description.errors %}
+                            <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Категория -->
+                        <div class="col-md-6 mb-3">
+                            <label for="id_category" class="form-label fw-bold">Категория *</label>
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.category.errors %}
+                                <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <div class="form-text">
+                                <a href="/admin/shop/category/add/" target="_blank" class="text-decoration-none">
+                                    <i class="bi bi-plus-circle"></i> Добавить новую категорию
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Цена -->
+                        <div class="col-md-3 mb-3">
+                            <label for="id_price" class="form-label fw-bold">Цена (руб.) *</label>
+                            <div class="input-group">
+                                {{ form.price }}
+                                <span class="input-group-text">₽</span>
+                            </div>
+                            {% if form.price.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.price.errors %}
+                                <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!-- Цена опт -->
+                        <div class="col-md-3 mb-3">
+                            <label for="id_opt_price" class="form-label fw-bold">Цена опт (руб.) *</label>
+                            <div class="input-group">
+                                {{ form.opt_price }}
+                                <span class="input-group-text">₽</span>
+                            </div>
+                            {% if form.price.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.price.errors %}
+                                <div>{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Изображение -->
+                    <div class="mb-4">
+                        <label for="image-upload" class="form-label fw-bold">Изображение товара</label>
+                        {{ form.image }}
+                        {% if form.image.errors %}
+                        <div class="text-danger small mt-1">
+                            {% for error in form.image.errors %}
+                            <div>{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        <!-- Превью изображения -->
+                        <div class="mt-3" id="image-preview-container" style="display: none;">
+                            <p class="mb-2">Предпросмотр:</p>
+                            <img id="image-preview" src="#" alt="Предпросмотр" 
+                                 class="img-thumbnail" style="max-width: 250px; max-height: 200px;">
+                        </div>
+                        
+                        {% if form.instance.image %}
+                        <div class="mt-3">
+                            <p class="mb-2">Текущее изображение:</p>
+                            <img src="{{ form.instance.get_image_url }}" 
+                                 alt="Текущее изображение"
+                                 class="img-thumbnail"
+                                 style="max-width: 250px;">
+                        </div>
+                        {% endif %}
+                        
+                        <div class="form-text mt-2">
+                            <i class="bi bi-info-circle"></i> 
+                            Поддерживаемые форматы: JPG, PNG, WebP. Максимальный размер: 5MB.
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <a href="{% if form.instance.pk %}{% url 'shop:product_detail' form.instance.pk %}{% else %}{% url 'shop:home' %}{% endif %}" 
+                           class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Отмена
+                        </a>
+                        
+                        <button type="submit" class="btn btn-success px-4 py-2">
+                            <i class="bi bi-{% if form.instance.pk %}check-lg{% else %}plus-lg{% endif %}"></i>
+                            {% if form.instance.pk %}Сохранить изменения{% else %}Создать товар{% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Информация о категориях -->
+        <div class="card mt-4 border-0 shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title mb-3">
+                    <i class="bi bi-tags"></i> Доступные категории
+                </h6>
+                <div class="row">
+                    {% for category in categories %}
+                    <div class="col-md-4 mb-2">
+                        <div class="badge bg-info text-dark p-2 w-100">
+                            {{ category.name }}
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle"></i>
+                            Категории не найдены. Создайте категории через админ-панель.
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    // Предпросмотр изображения перед загрузкой
+    document.getElementById('image-upload').addEventListener('change', function(event) {
+        const previewContainer = document.getElementById('image-preview-container');
+        const preview = document.getElementById('image-preview');
+        
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                previewContainer.style.display = 'block';
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+        } else {
+            previewContainer.style.display = 'none';
+        }
+    });
+    
+    // Валидация формы
+    document.getElementById('product-form').addEventListener('submit', function(e) {
+        const name = document.getElementById('id_name').value.trim();
+        const price = document.getElementById('id_price').value;
+        const category = document.getElementById('category-select').value;
+        
+        let errors = [];
+        
+        if (!name) {
+            errors.push('Название товара обязательно для заполнения');
+        }
+        
+        if (!price || parseFloat(price) <= 0) {
+            errors.push('Цена должна быть больше 0');
+        }
+        
+        if (!category) {
+            errors.push('Необходимо выбрать категорию');
+        }
+        
+        if (errors.length > 0) {
+            e.preventDefault();
+            alert('Пожалуйста, исправьте следующие ошибки:\n\n' + errors.join('\n'));
+        }
+    });
+</script>
+{% endblock %}
+
+{% block css %}
+<style>
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        transition: all 0.3s;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #4a6cf7;
+        box-shadow: 0 0 0 0.2rem rgba(74, 108, 247, 0.25);
+    }
+    
+    .form-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #333;
+    }
+    
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        border-bottom: none;
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 10px 30px;
+    }
+    
+    .btn-success:hover {
+        background: linear-gradient(135deg, #218838 0%, #1ba87e 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .img-thumbnail {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        padding: 5px;
+        background-color: #fff;
+    }
+    
+    .badge {
+        border-radius: 6px;
+        font-weight: 500;
+        text-align: center;
+    }
+</style>
+{% endblock %}

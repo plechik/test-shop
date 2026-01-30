@@ -1,0 +1,55 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<header class="site-header">
+    <div class="top-bar">
+        <div class="header-container">
+            <div class="top-links">
+                <a href="#">Оплата</a>
+                <a href="#">Доставка</a>
+                <a href="#">Прайс</a>
+                <a href="#">Новости</a>
+                <a href="#">Контакты</a>
+            </div>
+            <div class="top-contacts">
+                <span><i class="bi bi-geo-alt"></i> г. Мелитополь</span>
+                <a href="mailto:info@evrika.ru"><i class="bi bi-envelope"></i> info@evrika.ru</a>
+                <a href="tel:88005553535" class="phone"><strong>+7 99 00 0000 00</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="header-container">
+            <a class="logo-link" href="{% url 'shop:home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Эврика">
+            </a>
+
+            <form class="search-form" method="get" action="#">
+                <input type="text" name="q" placeholder="Поиск по сайту..." autocomplete="off">
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+
+            <div class="user-menu">
+                {% if user.is_authenticated %}
+                <a href="#" class="menu-item">
+                    <i class="bi bi-person"></i>
+                    <span>Кабинет</span>
+                </a>
+                {% else %}
+                <a href="{% url 'register' %}" class="menu-item">
+                    <i class="bi bi-person-plus"></i>
+                    <span>Регистрация</span>
+                </a>
+                {% endif %}
+                <a href="#" class="menu-item">
+                    <i class="bi bi-heart"></i>
+                    <span>Избранное</span>
+                </a>
+                <a href="#" class="menu-item cart">
+                    <i class="bi bi-cart3"></i>
+                    <span>Корзина</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

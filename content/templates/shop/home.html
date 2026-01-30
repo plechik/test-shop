@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Главная - Магазин Evrika{% endblock %}
+
+{% block content %}
+<button id="sidebar-toggle" class="mobile-catalog-btn">
+    <i class="bi bi-list"></i> Каталог
+</button>
+
+<div class="shop-wrapper">
+    <main class="main-content">
+        <section class="section">
+            <h2 class="section-title">Новые товары</h2>
+            
+            {% if latest_products %}
+                <div class="product-grid">
+                    {% for product in latest_products %}
+                    <div class="product-card">
+                        <a href="{{ product.get_absolute_url }}" class="card-image">
+                            <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+                        </a>
+                        <div class="card-info">
+                            <h5>{{ product.name|truncatechars:50 }}</h5>
+                            <p class="description">{{ product.description|truncatechars:80|default:"Нет описания" }}</p>
+                            <div class="card-footer">
+                                <span class="price">{{ product.price }} ₽</span>
+                                <div class="button-group">
+                                    <a href="{{ product.get_absolute_url }}" class="btn-detail">Подробнее</a>
+                                    <a href="#" class="btn-cart"><i class="bi bi-cart-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="show-all-container">
+                    <a href="{% url 'shop:product_list' %}" class="btn-outline">Показать все товары</a>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <aside class="sidebar-catalog" id="sidebar">
+        <h3 class="sidebar-title"><i class="bi bi-tags"></i> Категории</h3>
+        <nav class="category-list">
+            {% for category in categories %}
+                <a href="{% url 'shop:product_list' %}?category={{ category.id }}" class="category-item">
+                    <span class="category-name">{{ category.name }}</span>
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            {% empty %}
+                <p>Категорий нет</p>
+            {% endfor %}
+        </nav>
+    </aside>
+</div>
+
+<div id="overlay" class="overlay"></div>
+{% endblock %}
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        
+        // Блокируем прокрутку страницы при открытом меню
+        document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+    }
+
+    toggleBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu); // Закрыть при клике на пустое место
+});
+</script>
+{% endblock %}
