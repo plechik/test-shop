@@ -3,6 +3,13 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomLoginForm
 
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Вы вышли из аккаунта")
+    return redirect("shop:home")
+
+
 def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)

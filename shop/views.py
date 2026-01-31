@@ -161,3 +161,55 @@ def product_update(request, pk):
         'title': f'Редактирование: {product.name}'
     }
     return render(request, 'shop/product_update.html', context)
+
+
+# ==================== INFO PAGES ====================
+
+def payment_view(request):
+    """Страница оплаты"""
+    return render(request, 'shop/payment.html', {'title': 'Способы оплаты'})
+
+def delivery_view(request):
+    """Страница доставки"""
+    return render(request, 'shop/delivery.html', {'title': 'Доставка'})
+
+def contacts_view(request):
+    """Страница контактов"""
+    return render(request, 'shop/contacts.html', {'title': 'Контакты'})
+
+def news_view(request):
+    """Страница новостей"""
+    return render(request, 'shop/news.html', {'title': 'Новости'})
+
+def price_view(request):
+    """Страница прайс-листа"""
+    categories = Category.objects.all()
+    return render(request, 'shop/price.html', {'title': 'Прайс-лист', 'categories': categories})
+
+
+# ==================== USER PAGES ====================
+
+def cart_view(request):
+    """Страница корзины"""
+    # Пока корзина пустая - для демонстрации
+    context = {
+        'title': 'Корзина',
+        'cart_items': [],
+        'cart_count': 0,
+        'cart_subtotal': 0,
+        'cart_total': 0,
+    }
+    return render(request, 'shop/cart.html', context)
+
+def favorites_view(request):
+    """Страница избранного"""
+    # Пока избранное пустое - для демонстрации
+    context = {
+        'title': 'Избранное',
+        'favorites': [],
+    }
+    return render(request, 'shop/favorites.html', context)
+
+def profile_view(request):
+    """Страница личного кабинета"""
+    return render(request, 'shop/profile.html', {'title': 'Личный кабинет'})

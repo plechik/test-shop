@@ -2,37 +2,51 @@
 {% load static %}
 {% block css %}<link rel="stylesheet" href="{% static 'css/log_reg.css' %}">{% endblock %}
 
-{% block title %} Регистрация {% endblock %}
+{% block title %}Регистрация - Магазин Evrika{% endblock %}
 
 {% block content %}
 <div class="register-page">
     <div class="form">
         <form method="post" action="{% url 'register' %}">
-        {% csrf_token %}
-        <h3 class="register-title">Регистрация</h3>
-        <h5>{{form.username.label}}</h5>
-        {{form.username}}
-        <h5>{{form.first_name.label}}</h5>
-        {{form.first_name}}
-        <h5>{{form.last_name.label}}</h5>
-        {{form.last_name}}
-        <h5>{{form.phone_number.label}}</h5>
-        {{form.phone_number}}
-        <h5>{{form.email.label}}</h5>
-        {{form.email}}</h5>
-        <h5>{{form.password1.label}}</h5>
-        {{form.password1}}
-        <h5>{{form.password2.label}}</h5>
-        {{form.password2}}
-        <button type="submit"> Create </button>
-        {% if form.errors %}
-            {% for error in form.errors %}
-            <p class="error">{{ error }}</p>
-            {% endfor %}
-        {% endif %}
-        <p class="message">Already registered? <a href="{%url 'login' %}">Log In</a></p>
+            {% csrf_token %}
+            <h3 class="register-title">Регистрация</h3>
+            
+            <h5>{{ form.username.label }}</h5>
+            {{ form.username }}
+            
+            <h5>{{ form.first_name.label }}</h5>
+            {{ form.first_name }}
+            
+            <h5>{{ form.last_name.label }}</h5>
+            {{ form.last_name }}
+            
+            {% if form.phone_number %}
+            <h5>{{ form.phone_number.label }}</h5>
+            {{ form.phone_number }}
+            {% endif %}
+            
+            <h5>{{ form.email.label }}</h5>
+            {{ form.email }}
+            
+            <h5>{{ form.password1.label }}</h5>
+            {{ form.password1 }}
+            
+            <h5>{{ form.password2.label }}</h5>
+            {{ form.password2 }}
+            
+            {% if form.errors %}
+            <div class="error-list">
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <button type="submit">Создать аккаунт</button>
+            <p class="message">Уже зарегистрированы? <a href="{% url 'login' %}">Войти</a></p>
         </form>
     </div>
 </div>
-
 {% endblock %}
