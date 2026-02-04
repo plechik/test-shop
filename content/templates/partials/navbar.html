@@ -4,11 +4,11 @@
     <div class="top-bar">
         <div class="header-container">
             <div class="top-links">
-                <a href="#">Оплата</a>
-                <a href="#">Доставка</a>
-                <a href="#">Прайс</a>
-                <a href="#">Новости</a>
-                <a href="#">Контакты</a>
+                <a href="{% url 'shop:payment' %}">Оплата</a>
+                <a href="{% url 'shop:delivery' %}">Доставка</a>
+                <a href="{% url 'shop:price' %}">Прайс</a>
+                <a href="{% url 'shop:news' %}">Новости</a>
+                <a href="{% url 'shop:contacts' %}">Контакты</a>
             </div>
             <div class="top-contacts">
                 <span><i class="bi bi-geo-alt"></i> г. Мелитополь</span>
@@ -31,7 +31,7 @@
 
             <div class="user-menu">
                 {% if user.is_authenticated %}
-                <a href="#" class="menu-item">
+                <a href="{% url 'shop:profile' %}" class="menu-item">
                     <i class="bi bi-person"></i>
                     <span>Кабинет</span>
                 </a>
@@ -41,11 +41,11 @@
                     <span>Регистрация</span>
                 </a>
                 {% endif %}
-                <a href="#" class="menu-item">
+                <a href="{% url 'shop:favorites' %}" class="menu-item">
                     <i class="bi bi-heart"></i>
                     <span>Избранное</span>
                 </a>
-                <a href="#" class="menu-item cart">
+                <a href="{% url 'shop:cart' %}" class="menu-item cart">
                     <i class="bi bi-cart3"></i>
                     <span>Корзина</span>
                 </a>

@@ -32,3 +32,8 @@ def login_view(request):
         form = CustomLoginForm()
 
     return render(request, "auth_system/login.html", {"form": form})
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Вы вышли из аккаунта")
+    return redirect("shop:home")

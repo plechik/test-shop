@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Новости - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<div class="info-page">
+    <h1>Новости магазина</h1>
+    
+    <div class="news-list">
+        <article class="news-item">
+            <div class="news-image">
+                <i class="bi bi-newspaper" style="font-size: 3rem;"></i>
+            </div>
+            <div class="news-content">
+                <div class="news-date"><i class="bi bi-calendar"></i> 30 января 2026</div>
+                <h3>Расширение ассортимента товаров</h3>
+                <p>Мы рады сообщить о значительном расширении ассортимента нашего магазина. Теперь у нас представлено более 1000 наименований товаров для дома и быта. Приходите и выбирайте!</p>
+                <a href="#" class="news-link">Читать далее <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </article>
+        
+        <article class="news-item">
+            <div class="news-image">
+                <i class="bi bi-percent" style="font-size: 3rem;"></i>
+            </div>
+            <div class="news-content">
+                <div class="news-date"><i class="bi bi-calendar"></i> 25 января 2026</div>
+                <h3>Скидки на посуду до 30%</h3>
+                <p>С 25 января по 10 февраля действуют скидки до 30% на всю посуду. Успейте приобрести качественную посуду по выгодным ценам. Акция распространяется на весь ассортимент раздела.</p>
+                <a href="#" class="news-link">Читать далее <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </article>
+        
+        <article class="news-item">
+            <div class="news-image">
+                <i class="bi bi-truck" style="font-size: 3rem;"></i>
+            </div>
+            <div class="news-content">
+                <div class="news-date"><i class="bi bi-calendar"></i> 15 января 2026</div>
+                <h3>Бесплатная доставка при заказе от 3000 руб.</h3>
+                <p>Отличная новость! Теперь при заказе от 3000 рублей доставка по городу абсолютно бесплатная. Делайте покупки и экономьте на доставке.</p>
+                <a href="#" class="news-link">Читать далее <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </article>
+        
+        <article class="news-item">
+            <div class="news-image">
+                <i class="bi bi-shop" style="font-size: 3rem;"></i>
+            </div>
+            <div class="news-content">
+                <div class="news-date"><i class="bi bi-calendar"></i> 1 января 2026</div>
+                <h3>Режим работы в праздничные дни</h3>
+                <p>Уважаемые покупатели! Сообщаем о режиме работы магазина в праздничные дни. С 1 по 8 января магазин работает по сокращенному графику с 10:00 до 14:00.</p>
+                <a href="#" class="news-link">Читать далее <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}

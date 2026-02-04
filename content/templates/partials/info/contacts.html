@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<div class="info-page">
+    <h1>Контактная информация</h1>
+    
+    <div class="contacts-grid">
+        <div class="contact-card">
+            <i class="bi bi-geo-alt"></i>
+            <h3>Адрес</h3>
+            <p>г. Мелитополь<br>ул. Карла Маркса, 1А</p>
+        </div>
+        
+        <div class="contact-card">
+            <i class="bi bi-telephone"></i>
+            <h3>Телефон</h3>
+            <p><a href="tel:+79900000000">+7 (99) 000-00-00</a></p>
+        </div>
+        
+        <div class="contact-card">
+            <i class="bi bi-envelope"></i>
+            <h3>Email</h3>
+            <p><a href="mailto:info@evrika.ru">info@evrika.ru</a></p>
+        </div>
+        
+        <div class="contact-card">
+            <i class="bi bi-clock"></i>
+            <h3>Время работы</h3>
+            <p>Пн-Пт: 8:00 - 14:00<br>Сб-Вс: 8:00 - 14:00</p>
+        </div>
+    </div>
+    
+    <div class="contact-form">
+        <h2>Напишите нам</h2>
+        <form method="post" action="#">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Введите email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Сообщение</label>
+                <textarea id="message" name="message" placeholder="Введите ваше сообщение..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn-submit">
+                <i class="bi bi-send"></i> Отправить сообщение
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

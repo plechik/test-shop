@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 0 15px;
     width: 100%;
@@ -236,6 +236,9 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
 .footer-section b {
@@ -247,6 +250,10 @@ body {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #444;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 auto;
 }
 
 /* --- АДАПТИВНОСТЬ --- */

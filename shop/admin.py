@@ -18,9 +18,9 @@ class ProductAdmin(admin.ModelAdmin):
     ordering = ['-created_at']
     fieldsets = (
         ('Основная информация', {
-            'fields': ('name', 'description', 'category')
+            'fields': ('name', 'slug', 'id_1c', 'description', 'category')
         }),
         ('Цена и изображение', {
-            'fields': ('price', 'image')
+            'fields': ('price', 'opt_price', 'image')
         }),
     )

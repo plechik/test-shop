@@ -3,52 +3,67 @@
 
 {% block title %}Товары - Магазин "Evrika"{% endblock %}
 
-{% block css %}<link rel="stylesheet" href="{% static 'css/style.css' %}">{% endblock %}
-
 {% block content %}
+<button id="sidebar-toggle" class="mobile-catalog-btn">
+    <i class="bi bi-filter"></i> Фильтры
+</button>
+
 <div class="shop-wrapper">
-    <div class="header-section mb-4">
-        <h1 class="section-title">Каталог товаров</h1>
-    </div>
-
-    <div class="product-grid">
-        {% for product in products %}
-        <article class="product-card">
-            <div class="card-image">
-                {% if product.image %}
-                    <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
-                {% else %}
-                    <div class="no-image-placeholder">Нет фото</div>
-                {% endif %}
-            </div>
-
-            <div class="card-info">
-                <h5 class="card-title">{{ product.name|truncatechars:50 }}</h5>
-                <p class="card-text text-muted">
-                    {{ product.description|truncatechars:80|default:"Описание отсутствует" }}
-                </p>
-                
-                <div class="card-footer">
-                    <p class="price">{{ product.price }} ₽</p>
+    <main class="main-content">
+        <div class="header-section mb-4">
+            <h1 class="section-title">Каталог товаров</h1>
+        </div>
+        
+        <div class="product-grid">
+            {% for product in products %}
+            <article class="product-card">
+                <div class="card-image">
+                    {% if product.image %}
+                        <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="no-image-placeholder">Нет фото</div>
+                    {% endif %}
+                </div>
+                <div class="card-info">
+                    <h5 class="card-title">{{ product.name|truncatechars:50 }}</h5>
+                    <p class="card-text text-muted">
+                        {{ product.description|truncatechars:80|default:"Описание отсутствует" }}
+                    </p>
                     
-                    <div class="button-group">
-                        <a href="{{ product.get_absolute_url }}" class="btn-detail">
-                            <i class="bi bi-eye"></i> Подробнее
-                        </a>
-                        <button class="btn-cart">
-                            <i class="bi bi-cart-plus"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="date-added mt-3">
-                        <small class="text-muted">
-                            <i class="bi bi-clock"></i> {{ product.created_at|date:"d.m.Y" }}
-                        </small>
+                    <div class="card-footer">
+                        <p class="price">{{ product.price }} ₽</p>
+                        
+                        <div class="button-group">
+                            <a href="{{ product.get_absolute_url }}" class="btn-detail">Подробнее
+                            </a>
+                            <button class="btn-cart">
+                                <i class="bi bi-cart-plus"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </article>
-        {% endfor %}
-    </div>
+            </article>
+            {% empty %}
+                <p>Товары не найдены.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <aside class="sidebar-catalog" id="sidebar">
+        <h3 class="sidebar-title"><i class="bi bi-sliders"></i> Фильтры</h3>
+        <div class="filter-section">
+            <p><strong>Цена</strong></p>
+            <input type="text" placeholder="От" style="width: 45%;">
+            <input type="text" placeholder="До" style="width: 45%;">
+            <hr>
+            <p><strong>Бренд</strong></p>
+            <label style="display: block;"><input type="checkbox"> Бренд 1</label>
+            <label style="display: block;"><input type="checkbox"> Бренд 2</label>
+            <hr>
+            <button class="btn-detail" style="width: 100%;">Применить</button>
+        </div>
+    </aside>
 </div>
+
+<div id="overlay" class="overlay"></div>
 {% endblock %}

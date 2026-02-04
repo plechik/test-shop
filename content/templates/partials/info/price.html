@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Прайс-лист - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<div class="info-page">
+    <h1>Прайс-лист</h1>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-file-earmark-spreadsheet"></i> Скачать прайс-лист</h2>
+        <p>Вы можете скачать актуальный прайс-лист в формате Excel или PDF для удобного просмотра всего ассортимента и цен.</p>
+        <a href="#" class="download-btn">
+            <i class="bi bi-file-earmark-excel"></i> Скачать прайс (Excel)
+        </a>
+        <a href="#" class="download-btn" style="background: #dc3545; margin-left: 10px;">
+            <i class="bi bi-file-earmark-pdf"></i> Скачать прайс (PDF)
+        </a>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-info-circle"></i> Информация о ценах</h2>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Все цены указаны в рублях</li>
+            <li><i class="bi bi-check-circle"></i> Цены актуальны на момент публикации</li>
+            <li><i class="bi bi-check-circle"></i> Для оптовых покупателей действуют специальные цены</li>
+            <li><i class="bi bi-check-circle"></i> Уточняйте наличие товара по телефону</li>
+        </ul>
+    </div>
+    
+    <h2 style="margin: 30px 0 20px;">Популярные категории товаров</h2>
+    
+    <div class="price-table-container">
+        <table class="price-table">
+            <thead>
+                <tr>
+                    <th>Категория</th>
+                    <th>Количество товаров</th>
+                    <th>Диапазон цен</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.products.count }} шт.</td>
+                    <td>от {{ category.min_price|default:"---" }} руб.</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="text-align: center; color: #888;">Категории пока не добавлены</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="info-card" style="margin-top: 30px;">
+        <h2><i class="bi bi-building"></i> Оптовым покупателям</h2>
+        <p>Для оптовых покупателей и юридических лиц действуют специальные условия:</p>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Индивидуальные скидки от объема заказа</li>
+            <li><i class="bi bi-check-circle"></i> Отсрочка платежа для постоянных клиентов</li>
+            <li><i class="bi bi-check-circle"></i> Бесплатная доставка при заказе от 10 000 руб.</li>
+            <li><i class="bi bi-check-circle"></i> Персональный менеджер</li>
+        </ul>
+        <p style="margin-top: 15px;">Для получения оптового прайс-листа свяжитесь с нами по телефону <strong>+7 (99) 000-00-00</strong> или отправьте запрос на <a href="mailto:opt@evrika.ru">opt@evrika.ru</a></p>
+    </div>
+</div>
+{% endblock %}
