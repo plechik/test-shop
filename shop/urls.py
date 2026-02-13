@@ -22,6 +22,7 @@ urlpatterns = [
     path('cart/', views.cart_view, name='cart'),
     path('favorites/', views.favorites_view, name='favorites'),
     path('profile/', views.profile_view, name='profile'),
+    path('manage/', views.staff_manage, name='staff_page'),
 
     path('<slug:category_slug>/<slug:product_slug>/', views.product_detail, name='product_detail'),
 ]

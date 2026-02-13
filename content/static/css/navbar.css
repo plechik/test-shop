@@ -69,6 +69,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .logo-link img {
     height: 50px; /* Отрегулируйте под ваш логотип */
     display: block;
+    order: 1
 }
 
 /* ПОИСК */
@@ -139,13 +140,12 @@ input[type="search"]::-webkit-search-results-decoration {
     
     .header-container {
         flex-wrap: wrap;
-        padding: 10px;
     }
 
     .search-form {
-        order: 3;
+        order: 1;
         margin: 10px 0 0 0;
-        max-width: 100%;
+        /* max-width: 100%; */
     }
 
     .user-menu {

@@ -17,7 +17,6 @@ body {
 .container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 15px;
     width: 100%;
 }
 
@@ -67,15 +66,16 @@ body {
 /* --- Основной макет магазина --- */
 .shop-wrapper {
     display: flex;
-    flex-direction: row-reverse; /* Каталог слева, товары справа */
+    flex-direction: row; /* Каталог слева, товары справа */
     gap: 20px;
-    max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
 }
 
 .sidebar-catalog {
     width: 240px;
+    min-height: 448px;
+    height: auto;
     flex-shrink: 0;
     position: sticky;
     top: 20px;
@@ -130,7 +130,7 @@ body {
 /* --- СЕТКА ТОВАРОВ --- */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(5, 1fr); 
     gap: 20px;
 }
 
@@ -148,7 +148,7 @@ body {
 .card-image img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: scale-down;
 }
 
 .no-image-placeholder {
@@ -268,6 +268,12 @@ body {
     font-weight: bold;
     padding-bottom: 20;
     margin-bottom: 15px;
+}
+
+@media (max-width: 1250px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 @media (max-width: 992px) {

@@ -7,7 +7,7 @@ from .forms import ProductForm
 def home_view(request):
     """Главная страница"""
     try:
-        latest_products = Product.objects.select_related('category').order_by('-created_at')[:4]
+        latest_products = Product.objects.select_related('category').order_by('-created_at')[:5]
         categories = Category.objects.all()[:6]
     except Exception as e:
         # Если произошла ошибка (например, таблицы не созданы)
@@ -212,3 +212,8 @@ def favorites_view(request):
 def profile_view(request):
     """Страница личного кабинета"""
     return render(request, 'partials/profile.html', {'title': 'Личный кабинет'})
+
+# ==================== ADMIN PAGE ====================
+
+def staff_manage(request):
+    return render(request, 'shop/staff_page.html', {'title': 'Админ панель'})
