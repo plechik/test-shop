@@ -1,0 +1,65 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<header class="site-header">
+    <div class="top-bar">
+        <div class="header-container">
+            <div class="top-links">
+                <a href="{% url 'shop:payment' %}">Оплата</a>
+                <a href="{% url 'shop:delivery' %}">Доставка</a>
+                <a href="{% url 'shop:price' %}">Прайс</a>
+                <a href="{% url 'shop:news' %}">Новости</a>
+                <a href="{% url 'shop:contacts' %}">Контакты</a>
+            </div>
+            <div class="top-contacts">
+                <span><i class="bi bi-geo-alt"></i> г. Мелитополь</span>
+                <a href="mailto:info@evrika.ru"><i class="bi bi-envelope"></i> info@evrika.ru</a>
+                <a href="tel:88005553535" class="phone"><strong>+7 99 00 0000 00</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="header-container">
+            <a class="logo-link" href="{% url 'shop:home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Эврика">
+            </a>
+
+            <form class="search-form" method="get" action="#">
+                <input type="text" name="q" placeholder="Поиск по сайту..." autocomplete="off">
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+
+            <div class="user-menu">
+                {% if user.is_authenticated %}
+                <a href="{% url 'shop:profile' %}" class="menu-item">
+                    <i class="bi bi-person"></i>
+                    <span>Кабинет</span>
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}" class="menu-item">
+                    <i class="bi bi-person-plus"></i>
+                    <span>Вход</span>
+                </a>
+                <a href="{% url 'register' %}" class="menu-item">
+                    <i class="bi bi-person-plus"></i>
+                    <span>Регистрация</span>
+                </a>
+                {% endif %}
+                <a href="{% url 'shop:favorites' %}" class="menu-item">
+                    <i class="bi bi-heart"></i>
+                    <span>Избранное</span>
+                </a>
+                <a href="{% url 'shop:cart' %}" class="menu-item cart">
+                    <i class="bi bi-cart3"></i>
+                    <span>Корзина</span>
+                </a>
+                {% if user.is_staff %}
+                <a href="{% url 'shop:staff_page' %}" class="menu-item">
+                    <i class="bi bi-braces"></i>
+                    <span>Для персонала</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>

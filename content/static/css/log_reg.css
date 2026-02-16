@@ -1,0 +1,95 @@
+:root {
+    --color-dark-blue: #526a83;
+    --color-message: #4b84ff;
+    --color-dark: #000000;
+    --color-input-bg: #e7e7e7;
+    --color-white: #e0e0e0;
+    --color-black: #000000;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.form {
+    background: var(--color-white);
+    padding: 40px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 7px;
+}
+
+.register-title {
+    color: var(--color-dark);
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.form h5 {
+    display: block;
+    color: var(--color-dark);
+    text-align: left;
+    margin: 15px 0 5px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.form input {
+    background: var(--color-input-bg);
+    width: 100%;
+    border: 0;
+    margin: 0 0 5px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 15px;
+    border-radius: 7px;
+    transition: background 0.2s ease;
+}
+
+.form input:focus {
+    background: var(--color-input-bg);
+    outline: none;
+}
+
+.form button {
+    background: var(--color-dark-blue);
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: var(--color-white);
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 7px;
+    transition: background 0.5s ease;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+    background: #1c2836;
+}
+
+.message {
+    margin: 20px 0 0;
+    color: #888;
+    font-size: 14px;
+}
+
+.message a {
+    color: var(--color-message);
+    text-decoration: none;
+    font-weight: bold;
+}

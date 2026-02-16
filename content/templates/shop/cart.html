@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Корзина - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<div class="user-page">
+    <h1><i class="bi bi-cart3"></i> Корзина</h1>
+    
+    {% if cart_items %}
+    <div class="cart-container">
+        <div class="cart-items">
+            {% for item in cart_items %}
+            <div class="cart-item">
+                <img src="{{ item.product.get_image_url }}" alt="{{ item.product.name }}" class="cart-item-image">
+                <div class="cart-item-info">
+                    <h4>{{ item.product.name }}</h4>
+                    <p>Артикул: {{ item.product.id_1c|default:"---" }}</p>
+                </div>
+                <div class="cart-item-actions">
+                    <div class="cart-item-price">{{ item.product.price }} руб.</div>
+                    <div class="quantity-control">
+                        <button type="button" onclick="decreaseQty(this)">-</button>
+                        <span>{{ item.quantity }}</span>
+                        <button type="button" onclick="increaseQty(this)">+</button>
+                    </div>
+                    <button class="btn-remove"><i class="bi bi-trash"></i> Удалить</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <aside class="cart-summary">
+            <h3>Итого</h3>
+            <div class="summary-row">
+                <span>Товары ({{ cart_count }})</span>
+                <span>{{ cart_subtotal }} руб.</span>
+            </div>
+            <div class="summary-row">
+                <span>Доставка</span>
+                <span>{{ delivery_cost|default:"Бесплатно" }}</span>
+            </div>
+            <div class="summary-row total">
+                <span>К оплате</span>
+                <span>{{ cart_total }} руб.</span>
+            </div>
+            <button class="btn-checkout">Оформить заказ</button>
+            <p style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: #888;">
+                <i class="bi bi-shield-check"></i> Безопасная оплата
+            </p>
+        </aside>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i class="bi bi-cart-x"></i>
+        <h3>Ваша корзина пуста</h3>
+        <p>Добавьте товары из каталога, чтобы оформить заказ</p>
+        <a href="{% url 'shop:product_list' %}" class="btn-primary">Перейти в каталог</a>
+    </div>
+    {% endif %}
+</div>
+
+{% block js %}
+<script>
+function increaseQty(btn) {
+    const span = btn.previousElementSibling;
+    let qty = parseInt(span.textContent);
+    span.textContent = qty + 1;
+}
+
+function decreaseQty(btn) {
+    const span = btn.nextElementSibling;
+    let qty = parseInt(span.textContent);
+    if (qty > 1) {
+        span.textContent = qty - 1;
+    }
+}
+</script>
+{% endblock %}
+{% endblock %}

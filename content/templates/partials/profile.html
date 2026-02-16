@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Личный кабинет - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<div class="user-page">
+    <h1><i class="bi bi-person-circle"></i> Личный кабинет</h1>
+    
+    {% if user.is_authenticated %}
+    <div class="profile-container">
+        <aside class="profile-sidebar">
+            <div class="profile-avatar">
+                <i class="bi bi-person"></i>
+            </div>
+            <h2>{{ user.first_name|default:user.username }}</h2>
+            <p>{{ user.email|default:"Email не указан" }}</p>
+            
+            <ul class="profile-menu">
+                <li><a href="#" class="active"><i class="bi bi-person"></i> Мои данные</a></li>
+                <li><a href="#"><i class="bi bi-bag"></i> Мои заказы</a></li>
+                <li><a href="{% url 'shop:favorites' %}"><i class="bi bi-heart"></i> Избранное</a></li>
+                <li><a href="#"><i class="bi bi-geo-alt"></i> Адреса доставки</a></li>
+                <li><a href="#"><i class="bi bi-bell"></i> Уведомления</a></li>
+                <li><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Выйти</a></li>
+            </ul>
+        </aside>
+        
+        <div class="profile-content">
+            <h2>Личные данные</h2>
+            
+            <form method="post" class="profile-form">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first_name">Имя</label>
+                        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" placeholder="Введите имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Фамилия</label>
+                        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" placeholder="Введите фамилию">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" placeholder="Введите email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone" value="{{ user.phone_number|default:'' }}" placeholder="+7 (___) ___-__-__">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Адрес доставки</label>
+                    <input type="text" id="address" name="address" placeholder="Введите адрес доставки по умолчанию">
+                </div>
+                
+                <button type="submit" class="btn-submit">Сохранить изменения</button>
+            </form>
+            
+            <hr style="margin: 40px 0; border: none; border-top: 1px solid #f0f0f0;">
+            
+            <h2>Изменить пароль</h2>
+            <form method="post" class="profile-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="current_password">Текущий пароль</label>
+                    <input type="password" id="current_password" name="current_password" placeholder="Введите текущий пароль">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="new_password">Новый пароль</label>
+                        <input type="password" id="new_password" name="new_password" placeholder="Введите новый пароль">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Подтверждение пароля</label>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Повторите новый пароль">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Изменить пароль</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i class="bi bi-person-x"></i>
+        <h3>Вы не авторизованы</h3>
+        <p>Войдите в аккаунт или зарегистрируйтесь, чтобы получить доступ к личному кабинету</p>
+        <a href="{% url 'login' %}" class="btn-primary" style="margin-right: 10px;">Войти</a>
+        <a href="{% url 'register' %}" class="btn-primary" style="background: #28a745;">Регистрация</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

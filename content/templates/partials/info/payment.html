@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Оплата - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<div class="info-page">
+    <h1>Способы оплаты</h1>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-cash-coin"></i> Наличный расчет</h2>
+        <p>Вы можете оплатить заказ наличными при получении товара в нашем магазине или курьеру при доставке по городу.</p>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Оплата при получении в магазине</li>
+            <li><i class="bi bi-check-circle"></i> Оплата курьеру при доставке</li>
+            <li><i class="bi bi-check-circle"></i> Без комиссии</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-credit-card"></i> Безналичный расчет</h2>
+        <p>Для юридических лиц и индивидуальных предпринимателей доступна оплата по безналичному расчету.</p>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Выставление счета на оплату</li>
+            <li><i class="bi bi-check-circle"></i> Полный комплект документов</li>
+            <li><i class="bi bi-check-circle"></i> Работаем с НДС и без НДС</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-phone"></i> Оплата банковской картой</h2>
+        <p>Принимаем к оплате карты Visa, MasterCard, МИР. Оплата производится через терминал в магазине.</p>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Visa / MasterCard / МИР</li>
+            <li><i class="bi bi-check-circle"></i> Безопасные платежи</li>
+            <li><i class="bi bi-check-circle"></i> Чек об оплате</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-shield-check"></i> Гарантии безопасности</h2>
+        <p>Все платежи обрабатываются безопасно. Мы не храним данные ваших банковских карт. При оплате вы получаете кассовый чек и все необходимые документы на товар.</p>
+    </div>
+</div>
+{% endblock %}

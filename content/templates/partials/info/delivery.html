@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Доставка - Магазин Evrika{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<div class="info-page">
+    <h1>Доставка товаров</h1>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-shop"></i> Самовывоз</h2>
+        <p>Вы можете забрать заказ самостоятельно из нашего магазина по адресу:</p>
+        <ul>
+            <li><i class="bi bi-geo-alt"></i> г. Мелитополь, ул. Карла Маркса, 1А</li>
+            <li><i class="bi bi-clock"></i> Пн-Пт: 8:00 - 14:00</li>
+            <li><i class="bi bi-clock"></i> Сб-Вс: 8:00 - 14:00</li>
+            <li><i class="bi bi-check-circle"></i> Бесплатно</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-truck"></i> Доставка по городу</h2>
+        <p>Осуществляем доставку по Мелитополю и ближайшим населенным пунктам.</p>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Доставка в течение 1-2 дней</li>
+            <li><i class="bi bi-check-circle"></i> Стоимость: от 200 руб.</li>
+            <li><i class="bi bi-check-circle"></i> Бесплатно при заказе от 5000 руб.</li>
+            <li><i class="bi bi-check-circle"></i> Доставка до двери</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-box-seam"></i> Доставка по региону</h2>
+        <p>Отправляем товары транспортными компаниями по всему региону.</p>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Сроки: 2-5 рабочих дней</li>
+            <li><i class="bi bi-check-circle"></i> Стоимость зависит от веса и расстояния</li>
+            <li><i class="bi bi-check-circle"></i> Отслеживание посылки</li>
+            <li><i class="bi bi-check-circle"></i> Страхование груза</li>
+        </ul>
+    </div>
+    
+    <div class="info-card">
+        <h2><i class="bi bi-info-circle"></i> Важная информация</h2>
+        <p>При получении товара обязательно проверьте:</p>
+        <ul>
+            <li><i class="bi bi-check-circle"></i> Целостность упаковки</li>
+            <li><i class="bi bi-check-circle"></i> Соответствие товара заказу</li>
+            <li><i class="bi bi-check-circle"></i> Наличие всех комплектующих</li>
+            <li><i class="bi bi-check-circle"></i> Работоспособность (при возможности)</li>
+        </ul>
+        <p style="margin-top: 15px; color: #888;">В случае обнаружения повреждений или несоответствия, сообщите об этом курьеру или свяжитесь с нами по телефону.</p>
+    </div>
+</div>
+{% endblock %}
