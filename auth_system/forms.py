@@ -35,11 +35,35 @@ class CustomUserCreationForm(UserCreationForm):
         label='Подтвердите пароль',
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].help_text = ""
+        self.fields['password2'].help_text = ""
+        
+        self.fields['password1'].widget = forms.PasswordInput()
+        self.fields['password2'].widget = forms.PasswordInput()
+
     class Meta:
         model = User
         fields = ("first_name", "last_name", "phone_number", "email", "username")
 
 class CustomLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        max_length=150,
+        required=True,
+        label='Имя пользователя',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    password = forms.CharField(
+        label='Пароль',
+        required=True,
+        widget=forms.PasswordInput() # Скрывает вводимые символы
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].help_text = ""
+
     class Meta:
         model = User
         fields = ("username", "password")

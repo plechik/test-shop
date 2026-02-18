@@ -131,23 +131,23 @@ body {
     width: 400px;
     height: 400px;
     background: white;
-    padding: 15px; /* Это создаст невидимый "мостик" для мышки */
-    margin-left: 30px;
-    /* Чтобы фон самого меню не прилипал к краю, 
-       оборачиваем контент внутри меню в еще один div или используем background-clip */
+    padding: 15px;
+    margin-left: 25px; /* Уменьшил чуть-чуть для надежности */
     border-radius: 12px;
     border: 1px solid rgba(177, 177, 177, 0.5);
     z-index: 9999;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
 }
 
 .subcategory-menu::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: -30px; /* Растягиваем невидимую область влево в сторону категории */
-    width: 30px;  /* Ширина этого мостика */
-    height: 100%;
-    background: transparent; /* Он остается невидимым */
+    top: -20px;    /* Расширяем вверх */
+    bottom: -20px; /* Расширяем вниз */
+    left: -40px;   /* Мостик до самой категории */
+    width: 50px;   
+    background: transparent;
+    pointer-events: all; /* Гарантируем, что мостик ловит мышь */
 }
 
 /* Показываем при наведении */
@@ -156,15 +156,6 @@ body {
 }
 
 /* Стили внутри меню подкатегорий */
-.subcategory-title {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    color: #007bff;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-
 .subcategory-grid {
     display: flex;
     flex-direction: column;
@@ -174,19 +165,13 @@ body {
 .subcategory-grid a {
     text-decoration: none;
     color: #555;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     transition: 0.2s;
 }
 
 .subcategory-grid a:hover {
     color: #007bff;
     padding-left: 5px;
-}
-
-.no-subs {
-    color: #bbb;
-    font-style: italic;
-    font-size: 0.9rem;
 }
 
 .category-item {
@@ -353,6 +338,10 @@ body {
     margin-bottom: 15px;
 }
 
+.mobile-submenu-toggle {
+    display: none;
+}
+
 @media (max-width: 1250px) {
     .product-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -373,7 +362,43 @@ body {
     .mobile-catalog-btn {
         display: block;
     }
+    .category-header {
+        display: flex;
+        align-items: center;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+    .category-item {
+        flex-grow: 1; /* Ссылка занимает всё место */
+        background: transparent !important;
+    }
+    .mobile-submenu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        padding: 10px 15px;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+    .subcategory-menu {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        margin-left: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 15px 10px 30px !important; /* Отступ слева для иерархии */
+        display: none; /* Скрыто по умолчанию */
+    }
+    .subcategory-menu.open {
+        display: block; /* Показываем при клике */
+    }
 
+    /* Убираем мостик на мобилках, он там не нужен */
+    .subcategory-menu::before {
+        display: none;
+    }
+    
     .sidebar-catalog {
         position: fixed;
         left: -100%; 

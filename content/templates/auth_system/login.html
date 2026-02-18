@@ -7,13 +7,13 @@
     <div class="form">
     <form class="register-form" method="POST" action="{% url 'login' %}">
         {% csrf_token %}
-        <h3 class="register-title">LOGIN</h3>
+        <h3 class="register-title">ВХОД</h3>
         <h5>{{form.username.label}}</h5>
         {{form.username}}
         <h5>{{form.password.label}}</h5>
         {{form.password}}
-        <button type="submit"> Login </button>
-        <p class="message"> Have no account? <a href="{% url 'register' %}"> Register</a></p>
+        <button type="submit"> Войти </button>
+        <p class="message"> Нету аккаунта? <a href="{% url 'register' %}"> Зарегистрироватся</a></p>
     </form>
     </div>
 </div>

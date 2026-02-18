@@ -1,37 +1,32 @@
 :root {
-    --color-dark-blue: #526a83;
-    --color-message: #4b84ff;
-    --color-dark: #000000;
     --color-input-bg: #e7e7e7;
-    --color-white: #e0e0e0;
-    --color-black: #000000;
 }
+
 
 body {
-    background-color: #ffffff;
+    background-color: #f8f9fa;
 }
-
 
 .register-page {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 20px;
+    padding: 40px;
 }
 
-.form {
-    background: var(--color-white);
+.form { 
+    background: #fff;
     padding: 40px 40px;
     text-align: center;
     width: 100%;
     max-width: 360px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    border-radius: 7px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
 }
 
 .register-title {
-    color: var(--color-dark);
+    color: #000000;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
@@ -40,7 +35,7 @@ body {
 
 .form h5 {
     display: block;
-    color: var(--color-dark);
+    color: #000000;
     text-align: left;
     margin: 15px 0 5px 0;
     font-size: 16px;
@@ -48,7 +43,7 @@ body {
 }
 
 .form input {
-    background: var(--color-input-bg);
+    background: #f1f1f1;
     width: 100%;
     border: 0;
     margin: 0 0 5px;
@@ -65,12 +60,13 @@ body {
 }
 
 .form button {
-    background: var(--color-dark-blue);
+    background: #ff8c00;
     width: 100%;
     border: 0;
     padding: 15px;
-    color: var(--color-white);
-    font-size: 14px;
+    color: #eeeeee;
+    font-size: 15px;
+    font-weight: 550;
     text-transform: uppercase;
     cursor: pointer;
     margin-top: 20px;
@@ -79,17 +75,17 @@ body {
 }
 
 .form button:hover, .form button:active, .form button:focus {
-    background: #1c2836;
+    background: #7393b8;
 }
 
 .message {
     margin: 20px 0 0;
     color: #888;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .message a {
-    color: var(--color-message);
+    color: #ff8c00;
     text-decoration: none;
     font-weight: bold;
 }

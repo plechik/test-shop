@@ -13,13 +13,15 @@
     <h3 class="sidebar-title"><i class="bi bi-tags"></i> Категории</h3>
         <nav class="category-list">
             {% for category in categories %}
-                <div class="category-wrapper"> <a href="{% url 'shop:product_list' %}?category={{ category.id }}" class="category-item">
-                        <span class="category-name">{{ category.name }}</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-
+                <div class="category-wrapper">
+                    <div class="category-header">
+                        <a href="{% url 'shop:product_list' %}?category={{ category.id }}" class="category-item">
+                            <span class="category-name">{{ category.name }}</span>
+                        </a>
+                        <button class="mobile-submenu-toggle"><i class="bi bi-chevron-down"></i></button>
+                    </div>
+                    
                     <div class="subcategory-menu">
-                        <div class="subcategory-title">{{ category.name }}</div>
                         <div class="subcategory-grid">
                             {% for sub in category.subcategory_set.all %}
                                 <a href="{% url 'shop:product_list' %}?category={{ category.id }}&subcategory={{ sub.id }}">
@@ -81,6 +83,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     toggleBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu); // Закрыть при клике на пустое место
+
+    const toggles = document.querySelectorAll('.mobile-submenu-toggle');
+    
+    toggles.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const wrapper = this.closest('.category-wrapper');
+            const menu = wrapper.querySelector('.subcategory-menu');
+            
+            // Переключаем класс и иконку
+            menu.classList.toggle('open');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('bi-chevron-down');
+            icon.classList.toggle('bi-chevron-up');
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const wrappers = document.querySelectorAll('.category-wrapper');
+
+    wrappers.forEach(wrapper => {
+        let timeout;
+        const menu = wrapper.querySelector('.subcategory-menu');
+
+        wrapper.addEventListener('mouseenter', () => {
+            clearTimeout(timeout);
+            // Сначала скрываем другие открытые меню
+            document.querySelectorAll('.subcategory-menu').forEach(m => {
+                if (m !== menu) m.style.display = 'none';
+            });
+            if (menu) menu.style.display = 'block';
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+            // Даем пользователю 300мс, чтобы "добежать" до меню
+            timeout = setTimeout(() => {
+                if (menu) menu.style.display = 'none';
+            }, 300); 
+        });
+    });
 });
 </script>
 {% endblock %}

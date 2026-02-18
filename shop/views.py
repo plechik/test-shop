@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Product, Category, Subcategory
 from .forms import ProductForm
+from django.contrib.auth import update_session_auth_hash
 
 def home_view(request):
     """Главная страница"""
@@ -217,6 +218,39 @@ def favorites_view(request):
 
 def profile_view(request):
     """Страница личного кабинета"""
+    if request.method == 'POST':
+        # Проверяем, какую форму отправили (данные или пароль)
+        if 'first_name' in request.POST:
+            # Обновление личных данных
+            user = request.user
+            user.first_name = request.POST.get('first_name')
+            user.last_name = request.POST.get('last_name')
+            user.email = request.POST.get('email')
+            if hasattr(user, 'phone_number'):
+                user.phone_number = request.POST.get('phone')
+            user.save()
+            messages.success(request, 'Личные данные успешно обновлены!')
+            return redirect('shop:profile')
+
+        elif 'current_password' in request.POST:
+            # Смена пароля
+            user = request.user
+            current_pass = request.POST.get('current_password')
+            new_pass = request.POST.get('new_password')
+            confirm_pass = request.POST.get('confirm_password')
+
+            if not user.check_password(current_pass):
+                messages.error(request, 'Неверный текущий пароль')
+            elif new_pass != confirm_pass:
+                messages.error(request, 'Новые пароли не совпадают')
+            elif len(new_pass) < 8:
+                messages.error('Пароль слишком короткий (мин. 8 символов)')
+            else:
+                user.set_password(new_pass)
+                user.save()
+                update_session_auth_hash(request, user) # Чтобы не разлогинило
+                messages.success(request, 'Пароль успешно изменен!')
+            return redirect('shop:profile')
     return render(request, 'partials/profile.html', {'title': 'Личный кабинет'})
 
 # ==================== ADMIN PAGE ====================
