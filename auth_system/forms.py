@@ -63,7 +63,3 @@ class CustomLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['password'].help_text = ""
-
-    class Meta:
-        model = User
-        fields = ("username", "password")

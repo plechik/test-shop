@@ -27,7 +27,7 @@ def login_view(request):
             login(request, user)
             return redirect("shop:home")
         else:
-            messages.error(request, "Неправильный номер телефона или пароль")
+            messages.error(request, "Неправильное имя пользователя или пароль")
     else:
         form = CustomLoginForm()
 
