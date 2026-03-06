@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "evrika/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "evrika/wsgi.py"
+    }
+  ]
+}
